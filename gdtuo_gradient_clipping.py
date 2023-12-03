@@ -3,6 +3,11 @@ This is modified source code from the Gradient Descent: The Ultimate Optimizer p
 that includes the proposed gradient clipping implementation.
 
 Code wrapped in ### are the additions made to the source code for the implementation.
+
+Code in form of
+# <original line>
+# <updated line>
+are modifications.
 '''
 
 import torch
@@ -26,9 +31,7 @@ class Optimizable:
     Optimizables recursively handle updates to their optimiz*ers*.
     '''
     # def __init__(self, parameters, optimizer)
-    ###
     def __init__(self, parameters, optimizer, parameter_g_norms=None):
-    ###
         self.parameters = parameters # a dict mapping names to tensors
         self.optimizer = optimizer   # which must itself be Optimizable
         ###
@@ -93,9 +96,7 @@ class NoOpOptimizer(Optimizable):
         pass
 
     # def step(self, params):
-    ###
     def step(self, params, param_g_norms=None):
-    ###
         pass
 
     def __str__(self):
