@@ -19,4 +19,4 @@ $\theta_t \leftarrow \theta_t'$
 $t$ refers to the $t$-th step of the optimization algorithm across a minibatch.
 
 # Usage
-Open ```sample_usage.ipynb``` in JupyterLab. In cell 3, uncomment the desired optimizer stack and leave the others commented. Optimizers with ```clip=True``` have gradient clipping enabled. Otherwise, gradient clipping is disabled. Execute the cells in the notebook as usual.
+Open ```sample_usage_mnist.ipynb``` or ```sample_usage_cifar10.ipynb``` in JupyterLab. In cell 3, uncomment the desired optimizer stack and leave the others commented. Optimizers with ```clip=True``` have gradient clipping enabled. Otherwise, gradient clipping is disabled. Execute the cells in the notebook as usual.
