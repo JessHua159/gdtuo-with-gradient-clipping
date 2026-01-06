@@ -6,7 +6,7 @@ Code wrapped in ### are the additions made to the source code for the implementa
 
 Code in form of
 # <original line>
-# <updated line>
+<updated line>
 are modifications.
 '''
 
@@ -42,7 +42,7 @@ class Optimizable:
     def initialize(self):
         ''' Initialize parameters, e.g. with a Kaiming initializer. '''
         pass
-    
+
     def begin(self):
         ''' Enable gradient tracking on current parameters. '''
         for param in self.all_params_with_gradients:
@@ -146,7 +146,7 @@ class SGD(Optimizable):
                 g = update_param_g_norm_info(param_g_norms, name, g, self.clip)
             ###
             params[name] = p - g * self.parameters['alpha']
-        
+
     def __str__(self):
         return 'sgd / '+ str(self.optimizer)
 
@@ -200,7 +200,7 @@ class AdaGrad(Optimizable):
         ###
         # super().__init__(parameters, optimizer)
         super().__init__(parameters, optimizer, parameter_g_norms)
-    
+
     # def step(self, params):
     def step(self, params, param_g_norms=None):
         # self.optimizer.step(self.parameters)
@@ -217,7 +217,7 @@ class AdaGrad(Optimizable):
             ###
             self.cache[name]['G'] = G = self.cache[name]['G'].detach() + torch.square(g)
             params[name] = param.detach() - self.parameters['alpha'] * g / torch.sqrt(G + self.eps).detach()
-    
+
     def __str__(self):
         return 'adagrad / ' + str(self.optimizer)
 
@@ -269,7 +269,7 @@ class RMSProp(Optimizable):
             self.cache[name]['s'] = s = gamma * self.cache[name]['s'].detach() + (1. - gamma) * torch.square(g)
             self.all_params_with_gradients.append(s)
             params[name] = param.detach() - alpha * g / torch.sqrt(s + self.eps)
-    
+
     def __str__(self):
         return 'rmsprop / ' + str(self.optimizer)
 
@@ -312,7 +312,7 @@ class RMSPropAlpha(Optimizable):
             self.cache[name]['s'] = s = self.gamma * self.cache[name]['s'].detach() + (1. - self.gamma) * torch.square(g)
             self.all_params_with_gradients.append(s)
             params[name] = param.detach() - alpha * g / torch.sqrt(s + self.eps)
-    
+
     def __str__(self):
         return 'rmspropAlpha / ' + str(self.optimizer)
 
@@ -464,26 +464,26 @@ class ModuleWrapper(Optimizable):
         self.module = module
         parameters = {k:v for k, v in module.named_parameters(recurse=True)}
         super().__init__(parameters, optimizer)
-    
+
     def initialize(self):
         self.optimizer.initialize()
-    
+
     def zero_grad(self):
         """ Set all gradients to zero. """
         self.module.zero_grad()
         for param in self.all_params_with_gradients:
             param.grad = torch.zeros_like(param)
         self.optimizer.zero_grad()
-    
+
     def forward(self, *xyz):
         return self.module(*xyz)
-    
+
     def train(self):
         self.module.train()
-    
+
     def eval(self):
         self.module.eval()
-    
+
     def step(self):
         self.optimizer.step(self.parameters)
         def set_param(m, k, v):
@@ -502,7 +502,7 @@ class ModuleWrapper(Optimizable):
 ###
 def update_param_g_norm_info(param_g_norms, name, g, clip=False):
     g_norm = torch.linalg.vector_norm(g)
-    
+
     num_g_norms = len(param_g_norms[name][0])
     prev_average_g_norm = param_g_norms[name][1]
     average_g_norm = ((prev_average_g_norm * num_g_norms) + g_norm) / (num_g_norms + 1)
