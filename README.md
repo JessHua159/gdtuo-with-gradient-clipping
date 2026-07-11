@@ -5,11 +5,9 @@ This repo contains:
 - Sample JupyterLab notebooks that show example usage of the extension for a multi-layer perceptron (MNIST) and a convolutional neural network (CIFAR10).
 
 # Abstract
-Gradient descent and its variations are a very popular and heavily used optimization algorithm used while training machine learning models. Within gradient descent, hyperparameters such as the step size, or learning rate, greatly affect the performance and convergence of the model and thus have a great impact. One way to determine these hyperparameters is by calculating a hypergradient to determine
-the optimal parameters from sub-optimal values. However, this method is prone to exploding gradients, and thus cannot handle initially high-valued hyperparmeters. In this study, we enhance the methodology to effectively handle high-valued initial hyperparameter values by employing the gradient clipping technique.
+Gradient descent is a popular and widely used optimization algorithm for training machine learning models. Within gradient descent, hyperparameters such as the step size, or learning rate, greatly affect the performance and convergence of the model and thus have a great impact. One way to determine these hyperparameters is by calculating a hypergradient to determine the optimal parameters from sub-optimal values. However, this method is prone to exploding gradients, and thus cannot handle initially high-valued hyperparmeters. In this study, we enhance the methodology to effectively handle high-valued initial hyperparameter values by employing the gradient clipping technique.
 
-Our approach involves the incorporation of the normed-based averaged gradient clipping into the hyperoptimizer’s secondary optimization process. This modification, integrated into existing frameworks, contributes to mitigating the adverse effects of exploding gradients and improving overall system performance. The empirical evaluation, conducted on the MNIST dataset, demonstrates the efficacy
-of this enhancement, particularly in scenarios where traditional methods struggle with large hyperparameter values.
+Our approach involves the incorporation of the normed-based averaged gradient clipping into the hyperoptimizer’s secondary optimization process. This modification, integrated into existing frameworks, contributes to mitigating the adverse effects of exploding gradients and improving overall system performance. The empirical evaluation, conducted on the MNIST dataset, demonstrates the efficacy of this enhancement, particularly in scenarios where traditional methods struggle with large hyperparameter values.
 
 # Gradient Clipping Algorithm
 $t = 1$: $\theta_t \leftarrow ||\mathbf{g}_t||_2$
